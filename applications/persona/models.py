@@ -48,7 +48,7 @@ class Person(TimeStampedModel):
         verbose_name_plural = 'Personas'
     
     def __str__(self):
-        return self.full_name
+        return str(self.full_name + ' - ' + self.job)
 
 
 class Reunion(TimeStampedModel):

@@ -8,7 +8,7 @@ new Vue({
     // cargamos lista de personas
     axios.get('/api/personas')
       .then(function (response) {
-        self.listaPersonas = response.data;
+        self.listaPersonas = response.data.results;
       })
       .catch(function (error) {
         console.log(error);
@@ -19,6 +19,7 @@ new Vue({
       var self = this;
       axios.get('/api/persona/search/' + kword)
         .then(function (response) {
+          console.log(response.data);
           self.listaPersonas = response.data;
         })
         .catch(function (error) {

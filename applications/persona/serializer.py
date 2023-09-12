@@ -26,6 +26,22 @@ class PersonSerializer(serializers.ModelSerializer):
             'hobbies'
         )
 
+class PersonSerializerActions(serializers.ModelSerializer):
+    #Se comenta esta linea para que al momento de almacenar o actualizar solo solicite los id y no todos los datos relacioados
+    #hobbies = HobbySerializer(many=True)
+
+    class Meta:
+        model = Person
+        #se puede usar el   fields = ('__all__') para indicar todos los campos del modelo
+        fields = (
+            'id',
+            'full_name',
+            'job',
+            'email',
+            'phone',
+            'hobbies'
+        )
+
 #serializador que no este vinculado a un modelo
 class PersonCustomSerializer(serializers.Serializer):
     id = serializers.IntegerField()
@@ -56,7 +72,7 @@ class PersonPaginationSerializer(pagination.PageNumberPagination):
 
 # serializador con relaciones
 class ReunionSerializer(serializers.ModelSerializer): 
-    #con esto el serializador me extrara todos los datos que se allan definido en el serializador de persona y no solo el id relacionado
+    #con esto el serializador me extraera todos los datos que se allan definido en el serializador de persona y no solo el id relacionado
     persona = PersonSerializer()
 
     #agregando campo que viene de la funcion en el manager

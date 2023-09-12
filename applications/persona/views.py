@@ -12,6 +12,7 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
 )
 
+# los serializadores me ayudan a convertir los datos a json y viceversa a datos que entienda django
 from .serializer import (
     PersonSerializer, 
     PersonCustomSerializer, 
@@ -20,7 +21,8 @@ from .serializer import (
     ReunionSerializer,
     ReunionSerializer2,
     ReunionSerializerLink,
-    CountReunionSerializer
+    CountReunionSerializer,
+    PersonSerializerActions
 )
 # #
 
@@ -67,13 +69,13 @@ class PersonSearchApi(ListAPIView):
    
 #Creación de registro Api
 class PersonaCreate(CreateAPIView):
-    serializer_class = PersonSerializer
+    serializer_class = PersonSerializerActions
 
 
 #detalle de registro
 class PersonaDetail(RetrieveAPIView):
     serializer_class = PersonSerializer
-    queryset = Person.objects.all() #aqui se puede realizar un filter para hacer mas eficiente la consulta
+    queryset = Person.objects.all() #aqui se puede realizar un filter para hacer mas eficiente la consulta Person.objects.filter(....)
 
 
 #eliminando registro
@@ -84,12 +86,12 @@ class PersonaDestroy(DestroyAPIView):
 
 #actualizando registro
 class PersonaUpdate(UpdateAPIView):
-    serializer_class = PersonSerializer
+    serializer_class = PersonSerializerActions
     queryset = Person.objects.all() 
 
 #actualizando registro extrayendo los datos que tenia anteriormente
 class PersonaUpdateRetrieve(RetrieveUpdateAPIView):
-    serializer_class = PersonSerializer
+    serializer_class = PersonSerializerActions
     queryset = Person.objects.all() 
 
 
